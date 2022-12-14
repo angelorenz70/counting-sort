@@ -53,7 +53,7 @@ void counting_sort(int * arrayA, int * arrayB, int k, int size){
     shift_to_left(arrayB, size);
 }
 
-int largerkey(int * array, int size){
+int largestkey(int * array, int size){
     int larger = 0;
     for(int i = 0; i < size; i++){
         if(larger < array[i]){

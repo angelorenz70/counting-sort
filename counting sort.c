@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<stdbool.h>
 
 void display(int * sort,int size){
     for(int i = 0; i < size; i++){
@@ -63,23 +64,41 @@ int largestkey(int * array, int size){
     return larger;
 }
 
+bool exist(int * array, int size, int key){
+    for(int i = 0; i <= size; i++){
+        if(array[i] == key){
+            return true;
+        }
+    }
+    return false;
+}
+
+int generate_random_num(int low, int high){
+    return (rand() % high - low + 1) + low;
+}
+
 int main(){
     int size = 5;
     int * arrayA, * arrayB;
     arrayA = calloc(size, sizeof(int));
     arrayB = calloc(size, sizeof(int));
 
+    //store random vlaue
     srand(time(0));
-    int low = 1, high = 20;
     for(int i = 0; i < size; i++){
-        arrayA[i] = (rand() % high - low + 1) + low;
+        int random = generate_random_num(1,20);
+        if(exist(arrayA, i, random)){
+            i = i - 1;
+        }else{
+            arrayA[i] = random;
+        }
     }
 
     //original data
     printf("Original array: ");
     display(arrayA, size);
     //check if we get the exact larger element in array
-    int key = largerkey(arrayA, size);
+    int key = largestkey(arrayA, size);
     printf("Larger key: %d\n", key);
     //set all the arrayB into zero
     set_into_zeros(arrayB, size);
